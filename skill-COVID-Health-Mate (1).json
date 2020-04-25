@@ -1,0 +1,315 @@
+{
+  "intents": [
+    {
+      "intent": "Queries",
+      "examples": [
+        {
+          "text": "What type of Precautionary Measures should be taken during COVID-19 ?"
+        },
+        {
+          "text": "What are the Symptoms appear in a person effected by COVID-19"
+        },
+        {
+          "text": "What are the Risks to prone to the COVID-19 affected person ?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Zones",
+      "examples": [
+        {
+          "text": "What type of Zones near by me ?"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Greet",
+      "examples": [
+        {
+          "text": "Thank You"
+        },
+        {
+          "text": "Hi"
+        },
+        {
+          "text": "Good Evening"
+        },
+        {
+          "text": "Good Morning"
+        },
+        {
+          "text": "Hello"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Updates",
+      "examples": [
+        {
+          "text": "What are the latest updates about COVID-19 positive cases near by me ?"
+        }
+      ],
+      "description": "Day to day updates about COVID-19 positive cases information from hospitals where the COVID-19 tests are being done."
+    }
+  ],
+  "entities": [
+    {
+      "entity": "Queries",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Precautionary Measures",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Risks",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "Symptoms",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Updates",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "updates",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Zones",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Zones",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Fewer,Tiredness,dry cough,aches and pains,nasal congestion,runny nose,sore throat"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1587750708489",
+      "conditions": "@Queries:Symptoms",
+      "dialog_node": "response_9_1587751426871",
+      "previous_sibling": "response_9_1587751380956"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "text": {
+          "values": [
+            "Lowers the immunity power,Damages the respiratory system,more vulnerable when if the person has chronic disease ultimately leading to death"
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_7_1587750708489",
+      "conditions": "@Queries:Risks",
+      "dialog_node": "response_9_1587751380956",
+      "previous_sibling": "response_3_1587750906724"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "A distance of atleast 1meter is necessary to ensure safety for all,Wash your hands with soap and water regularly,Avoid mass gathering and crowded places,if soap and water is not available use hand sanitizer with atleast 60% alcohol "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_7_1587750708489",
+      "conditions": "@Queries:(Precautionary Measures)",
+      "dialog_node": "response_3_1587750906724"
+    },
+    {
+      "type": "standard",
+      "title": "Updates",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Out of the 30 cases 5 are know to be tested as positive as per the reports today.\n1. COVID id:8267,Nakkala Bhagyasri vasudhi mounika,41- \n      1/4/44-1,Ranadheer nagar,Kristnalanka,99666782047.\n2. COVID id:8267,Cothi Kalyan Satya Prakash,41-58/1,Old \n      Police Station road,Gudivada,8179133662.\n3. COVID-id:8276,Pradala Santosh,41-23/2- \n      18,Krishnalanka,9150820306.\n4.  COVID-id:8283,K.Vijayalakshmi,41-6- \n       8,Machilipatnam,6300626654.\n5. COVID-id:8309,N.Satyavathi,234,Ranadheer nagar,Machilipatnam,6309588175"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Updates:updates",
+      "dialog_node": "node_3_1587755935984",
+      "previous_sibling": "node_5_1587758101340"
+    },
+    {
+      "type": "standard",
+      "title": "Greet",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hi"
+              },
+              {
+                "text": "Hello"
+              },
+              {
+                "text": "Good Morning"
+              },
+              {
+                "text": "Thank You"
+              },
+              {
+                "text": "Good Evening"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Greet",
+      "dialog_node": "node_5_1587748624694",
+      "previous_sibling": "node_7_1587750708489"
+    },
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_5_1587748624694",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Zones",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Type of Zones of near by places are:\n1. Nandigama-Red Zone\n2. Vijayanagaram-Green Zone\n3. Indira colony,Nehru nagar,Vijayawada-Orange Zone\n4.  Machilipatnam-Red Zone\n5. Atapaka-Orange Zone\n6.  Vellampeta-Green Zone"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@Zones:Zones",
+      "dialog_node": "node_5_1587758101340",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "standard",
+      "title": "Queries",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#Queries",
+      "dialog_node": "node_7_1587750708489",
+      "previous_sibling": "node_3_1587755935984"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello. How can I help you?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "system_entities": {
+      "enabled": true
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "COVID Health Mate",
+  "language": "en",
+  "description": ""
+}
